@@ -1,0 +1,9 @@
+<div class="card card-body">
+    <form>
+      <div class="form-group">
+        <input type="text" #text class="form-control" placeholder="What 've you been doing?">
+        <input type="submit" [disabled]="!this.text" class="btn">
+        <button type="button" [hidden]="!this.text" class="btn btn-warning">Clear form</button>
+      </div>
+    </form>
+  </div>
