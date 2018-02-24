@@ -1,3 +1,4 @@
+import { LogService } from '../../services/log.service';
 import { Log } from './../../models/log.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,21 +11,14 @@ export class LogsComponent implements OnInit {
 
   logs: Log[];
 
-  constructor() { }
+  constructor(private logService: LogService) { }
 
   ngOnInit() {
-    this.logs = [
-      {
-        id: '1',
-        text: 'Sleep for 9 hours :)',
-        date: new Date("02-12-2018 9:00")
-      },
-      {
-        id: '2',
-        text: 'Climb',
-        date: new Date("02-12-2018 12:00")
-      },
-    ];
+    this.logService.getLogs().subscribe(logs => {
+      this.logs = logs
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
