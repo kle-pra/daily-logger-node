@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Log } from '../models/log.model';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
 
 
 @Injectable()
 export class LogService {
   logs: Log[];
+  private currentLog = new BehaviorSubject<Log>(new Log(null, null));
+
+  selectedLog = this.currentLog.asObservable();
 
   constructor() {
     this.logs = [
@@ -23,8 +27,12 @@ export class LogService {
     ];
   }
 
-  getLogs(): Observable<any> {
+  getLogs(): Observable<Log[]> {
     return of(this.logs);
+  }
+
+  setSelectedLog(log: Log) {
+    this.currentLog.next(log);
   }
 
 }
