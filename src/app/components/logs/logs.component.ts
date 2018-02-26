@@ -11,12 +11,14 @@ export class LogsComponent implements OnInit {
 
   logs: Log[];
   selectedLog: Log;
+  loading = true;
 
   constructor(private logService: LogService) { }
 
   ngOnInit() {
     this.logService.getLogs().subscribe(logs => {
       this.logs = logs;
+      this.loading = false;
     }, error => {
       console.log(error);
     });
