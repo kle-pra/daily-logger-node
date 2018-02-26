@@ -10,19 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class LogsComponent implements OnInit {
 
   logs: Log[];
+  selectedLog: Log;
 
   constructor(private logService: LogService) { }
 
   ngOnInit() {
     this.logService.getLogs().subscribe(logs => {
-      this.logs = logs
+      this.logs = logs;
     }, error => {
       console.log(error);
     });
+
+    this.logService.selectedLog.subscribe((log: Log) => {
+      this.selectedLog = log;
+    });
   }
 
-  onSelect(log:Log){
+  onSelect(log: Log) {
     this.logService.setSelectedLog(log);
+  }
+
+  deleteLog(id: number) {
+    this.logService.deleteLog(id);
   }
 
 }
