@@ -5,9 +5,9 @@
         <i (click)="deleteLog(log.id)" class="fa fa-remove"></i>
     </li>
 </ul>
-<div  *ngIf="loading && logs.length>0">
+<div  *ngIf="loading">
     Loading ...
 </div>
 <div  *ngIf="!loading && logs.length === 0">
-    <h6>Nothing here today ... Do something ;)</h6>
+    <h5>Nothing here today ... Do something ;)</h5>
 </div>

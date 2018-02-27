@@ -13,31 +13,30 @@ export class LogService {
 
   selectedLog = this.currentLog.asObservable();
 
-  constructor() {
-    this.logs = [
-      // {
-      //   id: '1',
-      //   text: 'Sleep for 9 hours :)',
-      //   date: new Date('02-12-2018 9:00')
-      // },
-      // {
-      //   id: '2',
-      //   text: 'Climb',
-      //   date: new Date('02-12-2018 12:00')
-      // },
-    ];
-  }
-
-  getLogs(): Observable<Log[]> {
-    return of(this.logs);
-  }
-
   setSelectedLog(log: Log) {
     this.currentLog.next(log);
   }
 
+  constructor() {
+    this.logs = [
+    ];
+  }
+
+  getLogs(): Observable<Log[]> {
+
+    if (localStorage.getItem('logs') === null) {
+      this.logs = [];
+    } else {
+      this.logs = JSON.parse(localStorage.getItem('logs'));
+    }
+    return of(this.logs.sort());
+  }
+
+
   addLog(log: Log): any {
     this.logs.unshift(log);
+
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   updateLog(log: Log): any {
@@ -47,6 +46,7 @@ export class LogService {
       }
     });
     this.logs.unshift(log);
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   deleteLog(id): any {
@@ -55,6 +55,7 @@ export class LogService {
         this.logs.splice(i, 1);
       }
     });
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
 }
