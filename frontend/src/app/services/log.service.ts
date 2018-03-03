@@ -3,13 +3,13 @@ import { Log } from '../models/log.model';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class LogService {
 
-  logs: Log[];
   private currentLog = new BehaviorSubject<Log>(new Log(null, null));
+  newLog = new BehaviorSubject<Log>(new Log(null, null));
 
   selectedLog = this.currentLog.asObservable();
 
@@ -17,45 +17,27 @@ export class LogService {
     this.currentLog.next(log);
   }
 
-  constructor() {
-    this.logs = [
-    ];
+  constructor(private http: HttpClient) {
   }
 
-  getLogs(): Observable<Log[]> {
-
-    if (localStorage.getItem('logs') === null) {
-      this.logs = [];
-    } else {
-      this.logs = JSON.parse(localStorage.getItem('logs'));
-    }
-    return of(this.logs.sort());
+  getLogs(): Observable<any> {
+    return this.http.get('api/logs');
   }
 
 
   addLog(log: Log): any {
-    this.logs.unshift(log);
+    return this.http.post('api/logs', log);
 
-    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   updateLog(log: Log): any {
-    this.logs.forEach((l: Log, i: number) => {
-      if (l.id === log.id) {
-        this.logs.splice(i, 1);
-      }
-    });
-    this.logs.unshift(log);
-    localStorage.setItem('logs', JSON.stringify(this.logs));
+    return this.http.put('api/logs/' + log._id, log);
+
   }
 
   deleteLog(id): any {
-    this.logs.forEach((l: Log, i: number) => {
-      if (l.id === id) {
-        this.logs.splice(i, 1);
-      }
-    });
-    localStorage.setItem('logs', JSON.stringify(this.logs));
+    return this.http.delete('api/logs/' + id);
+
   }
 
 }

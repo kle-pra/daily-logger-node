@@ -1,13 +1,21 @@
 <ul *ngIf="!loading && logs.length>0" class="list-group">
-    <li [class.list-group-item-warning]="selectedLog.id === log.id" *ngFor="let log of logs" class="list-group-item d-flex justify-content-between align-items-center">
-        <a (click)="onSelect(log)" href="#">{{log.text}}</a>
-        <span class="log-date">{{log.date | date: 'dd.MM.yyyy @ hh:mm'}}</span>
-        <i (click)="deleteLog(log.id)" class="fa fa-remove"></i>
+    <li [class.list-group-item-warning]="selectedLog._id === log._id" *ngFor="let log of logs" class="list-group-item">
+        <div class="row">
+            <div class="col-md-6">
+                <a (click)="onSelect(log)" href="#">{{log.text}}</a>
+            </div>
+            <div class="col-md-3">
+                <span class="log-date">{{log.date | date: 'dd.MM.yyyy @ hh:mm'}}</span>
+            </div>
+            <div class="col-md-3">
+                <i (click)="deleteLog(log._id)" class="fa fa-remove"></i>
+            </div>
+        </div>
     </li>
 </ul>
-<div  *ngIf="loading">
+<div *ngIf="loading">
     Loading ...
 </div>
-<div  *ngIf="!loading && logs.length === 0">
+<div *ngIf="!loading && logs.length === 0">
     <h5>Nothing here today ... Do something ;)</h5>
 </div>

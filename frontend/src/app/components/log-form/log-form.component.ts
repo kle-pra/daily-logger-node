@@ -19,8 +19,8 @@ export class LogFormComponent implements OnInit {
 
   ngOnInit() {
     this.logService.selectedLog.subscribe(log => {
-      if (log.id !== null) {
-        this.id = log.id;
+      if (log._id !== null) {
+        this.id = log._id;
         this.text = log.text;
         this.date = log.date;
         this.isUpdate = true;
@@ -31,15 +31,25 @@ export class LogFormComponent implements OnInit {
   onSubmit() {
     if (!this.isUpdate) {
       this.logService.addLog({
-        id: this.generateUniqueId(),
+        _id: null,
         text: this.text,
         date: new Date()
+      }).subscribe(log => {
+        this.logService.newLog.next(log);
+      }, error => {
+        console.log(error);
       });
     } else {
       this.logService.updateLog({
-        id: this.id,
+        _id: this.id,
         text: this.text,
         date: new Date()
+      }).subscribe((updatedLog) => {
+
+        this.logService.newLog.next(updatedLog);
+
+      }, error => {
+        console.log(error);
       });
     }
     this.clearForm();
@@ -50,14 +60,6 @@ export class LogFormComponent implements OnInit {
     this.text = null;
     // set selected log to empty
     this.logService.setSelectedLog(new Log(null, null));
-  }
-
-  generateUniqueId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      // tslint:disable-next-line:no-bitwise
-      const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
   }
 
 }

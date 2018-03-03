@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogsComponent implements OnInit {
 
-  logs: Log[];
+  logs: Log[] = [];
   selectedLog: Log;
   loading = true;
 
@@ -26,14 +26,29 @@ export class LogsComponent implements OnInit {
     this.logService.selectedLog.subscribe((log: Log) => {
       this.selectedLog = log;
     });
+
+    this.logService.newLog.asObservable().subscribe((log) => {
+      // in case of update remove old and insert new
+      this.logs = this.logs.filter((l) => {
+        return l._id !== log._id;
+      });
+      this.logs.unshift(log);
+    });
+
   }
 
   onSelect(log: Log) {
     this.logService.setSelectedLog(log);
   }
 
-  deleteLog(id: number) {
-    this.logService.deleteLog(id);
+  deleteLog(id: string) {
+    this.logService.deleteLog(id).subscribe(() => {
+      this.logs = this.logs.filter((log) => {
+        return id !== log._id;
+      });
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
