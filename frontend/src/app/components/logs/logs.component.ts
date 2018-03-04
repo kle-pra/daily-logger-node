@@ -16,7 +16,7 @@ export class LogsComponent implements OnInit {
   constructor(private logService: LogService) { }
 
   ngOnInit() {
-    this.logService.getLogs().subscribe(logs => {
+    this.logService.getLogs(new Date()).subscribe(logs => {
       this.logs = logs;
       this.loading = false;
     }, error => {

@@ -20,8 +20,8 @@ export class LogService {
   constructor(private http: HttpClient) {
   }
 
-  getLogs(): Observable<any> {
-    return this.http.get('api/logs');
+  getLogs(date: Date): Observable<any> {
+    return this.http.get('api/logs?date=' + date.toDateString());
   }
 
 

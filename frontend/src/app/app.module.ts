@@ -8,6 +8,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LogFormComponent } from './components/log-form/log-form.component';
 import { LogService } from './services/log.service';
 import { LogsComponent } from './components/logs/logs.component';
+import { LogsArchiveComponent } from './components/logs-archive/logs-archive.component';
+import { AppRoutingModule } from './app-routing.module';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
 @NgModule({
@@ -15,12 +18,15 @@ import { LogsComponent } from './components/logs/logs.component';
     AppComponent,
     NavbarComponent,
     LogFormComponent,
-    LogsComponent
+    LogsComponent,
+    LogsArchiveComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [LogService],
   bootstrap: [AppComponent]

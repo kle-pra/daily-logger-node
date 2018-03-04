@@ -1,0 +1,33 @@
+<div class="row justify-content-md-center">
+  <div class="col-md-4">
+    Pick a date:
+    <input class="form-control" (change)="onDateSelect($event)" type="date">
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <div class="col-md-12">
+
+    <ul *ngIf="!loading && logs.length>0" class="list-group">
+      <li *ngFor="let log of logs" class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <a (click)="onSelect(log)" href="#">{{log.text}}</a>
+          </div>
+          <div class="col-md-6">
+            <span class="log-date">{{log.date | date: 'dd.MM.yyyy @ hh:mm'}}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="alert alert-light" *ngIf="selectedDate !=null && logs.length === 0">
+      Nothing here for the date {{selectedDate | date: 'MM/dd/yyyy'}}
+    </div>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <div class="col-md-4">
+    <button routerLink="/" type="button" class="btn btn-outline-secondary">Back to first page</button>
+  </div>
+</div>

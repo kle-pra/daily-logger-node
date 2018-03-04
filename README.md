@@ -14,4 +14,4 @@ To run, build backend & angular frontend and copy dist files to express '/static
 
 
 When build, frontend files are copied to static folder, served by Express.
-I plan on creating same projects with java backend (Spring Boot) on another branch of this repository: TO-DO
+I plan on creating same project with java backend (Spring Boot) on another branch of this repository: TO-DO

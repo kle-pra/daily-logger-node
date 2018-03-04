@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Log = require('../models/log.model');
 
-// middleware that is specific to this router
-router.use(function log(req, res, next) {
-    console.log("request " + req);
-    next();
-})
-
 router.get('/:id', function (req, res) {
     Log.findById(req.params.id, function (err, data) {
         if (err) {
@@ -21,15 +15,40 @@ router.get('/:id', function (req, res) {
 })
 
 router.get('/', function (req, res) {
-    Log.find({}, function (err, data) {
-        if (err) {
-            console.log(err);
-            return res.json({ error: error });
-        }
 
-        return res.json(data);
+    //find all logs for the day from date param else all
+    if (req.query.date) {
+        let date = new Date(req.query.date);
+        let month = date.getMonth();
+        let day = date.getDate() + 1;
+        let year = date.getFullYear();
+        let dateString = year + "-" + month + "-" + day;
+        console.log(dateString);
+        console.log(new Date(year, month, day));
+        Log.find(
+            // { '$where': 'this.date.toJSON().slice(0, 10) == "' + dateString + '"' }
+            { date: { $gte: new Date(year, month, day - 1), $lt: new Date(year, month, day) } }
+            , function (err, data) {
+                if (err) {
+                    console.log(err);
+                    return res.json({ error: error });
+                }
 
-    });
+                return res.json(data);
+
+            });
+
+    } else {
+        Log.find({}, function (err, data) {
+            if (err) {
+                console.log(err);
+                return res.json({ error: error });
+            }
+
+            return res.json(data);
+
+        });
+    }
 })
 
 router.post('/', function (req, res) {

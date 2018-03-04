@@ -16,6 +16,6 @@
 <div *ngIf="loading">
     Loading ...
 </div>
-<div *ngIf="!loading && logs.length === 0">
-    <h5>Nothing here today ... Do something ;)</h5>
+<div class="alert alert-light" *ngIf="!loading && logs.length === 0">
+    Nothing here today ... Do something ;)
 </div>

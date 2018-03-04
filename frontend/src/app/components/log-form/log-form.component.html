@@ -4,7 +4,7 @@
       <input name="text" [(ngModel)]="text" type="text" class="form-control" placeholder="What 've you been doing?">
       <br>
       <input type="submit" [disabled]="!text" class="btn">
-      <button (click) = "clearForm()" type="button" [hidden]="!text" class="btn btn-warning">Clear form</button>
+      <button (click)="clearForm()" type="button" [hidden]="!text" class="btn btn-warning">Reset</button>
     </div>
   </form>
 </div>
