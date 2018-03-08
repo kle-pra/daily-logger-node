@@ -16,7 +16,6 @@ export class LogFormComponent implements OnInit {
 
   constructor(private logService: LogService) { }
 
-
   ngOnInit() {
     this.logService.selectedLog.subscribe(log => {
       if (log._id !== null) {

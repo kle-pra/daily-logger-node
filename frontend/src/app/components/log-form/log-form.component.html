@@ -1,10 +1,14 @@
-<div class="card card-body">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <input name="text" [(ngModel)]="text" type="text" class="form-control" placeholder="What 've you been doing?">
-      <br>
-      <input type="submit" [disabled]="!text" class="btn">
-      <button (click)="clearForm()" type="button" [hidden]="!text" class="btn btn-warning">Reset</button>
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
+    <div class="card card-body">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input name="text" [(ngModel)]="text" type="text" class="form-control" placeholder="What 've you been doing?">
+          <br>
+          <input type="submit" [disabled]="!text" class="btn">
+          <button (click)="clearForm()" type="button" [hidden]="!text" class="btn btn-warning">Reset</button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

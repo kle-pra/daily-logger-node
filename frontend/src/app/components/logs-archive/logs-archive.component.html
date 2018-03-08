@@ -1,12 +1,12 @@
 <div class="row justify-content-md-center">
-  <div class="col-md-4">
+  <div class="col-md-6">
     Pick a date:
     <input class="form-control" (change)="onDateSelect($event)" type="date">
   </div>
 </div>
 <br>
 <div class="row justify-content-md-center">
-  <div class="col-md-12">
+  <div class="col-md-10">
 
     <ul *ngIf="!loading && logs.length>0" class="list-group">
       <li *ngFor="let log of logs" class="list-group-item">
@@ -27,7 +27,7 @@
 </div>
 <br>
 <div class="row justify-content-md-center">
-  <div class="col-md-4">
-    <button routerLink="/" type="button" class="btn btn-outline-secondary">Back to first page</button>
+  <div class="col-md-6">
+    <button routerLink="/" type="button" class="btn btn-block btn-outline-secondary">Back to first page</button>
   </div>
 </div>

@@ -12,8 +12,8 @@ export class LogsArchiveComponent implements OnInit {
   loading = true;
   selectedDate: Date = null;
 
-  constructor(private logService: LogService) {
-  }
+  constructor(private logService: LogService) { }
+
   ngOnInit() {
   }
 

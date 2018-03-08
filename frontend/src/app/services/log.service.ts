@@ -3,7 +3,7 @@ import { Log } from '../models/log.model';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class LogService {
@@ -21,22 +21,47 @@ export class LogService {
   }
 
   getLogs(date: Date): Observable<any> {
-    return this.http.get('api/logs?date=' + date.toDateString());
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+      })
+    };
+    return this.http.get('api/logs?date=' + date.toDateString(), httpOptions);
   }
 
 
   addLog(log: Log): any {
-    return this.http.post('api/logs', log);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+      })
+    };
+    return this.http.post('api/logs', log, httpOptions);
 
   }
 
   updateLog(log: Log): any {
-    return this.http.put('api/logs/' + log._id, log);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+      })
+    };
+    return this.http.put('api/logs/' + log._id, log, httpOptions);
 
   }
 
   deleteLog(id): any {
-    return this.http.delete('api/logs/' + id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt') !== null ? localStorage.getItem('jwt') : ''
+      })
+    };
+    return this.http.delete('api/logs/' + id, httpOptions);
 
   }
 
