@@ -27,7 +27,7 @@
         Password must match
       </div>
       <br>
-      <button [disabled]="f.invalid" class="btn btn-outline-success btn-block" type="submit">Sign in</button>
+      <button [disabled]="f.invalid || password.value!=confirmPass.value" class="btn btn-outline-success btn-block" type="submit">Register</button>
     </form>
   </div>
 </div>

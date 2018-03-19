@@ -15,4 +15,6 @@ To run, build backend & angular frontend and copy dist files to express '/static
 
 
 When build, frontend files are copied to over to static folder with npm scripts, which is served by Express.
-I plan on creating same project with java backend (Spring Boot) , maybe on another branch of this repository: TO-DO
+
+Same app build with Spring Boot (java) backend here: https://github.com/kle-pra/daily-logger-spring-boot
+
