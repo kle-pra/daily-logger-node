@@ -1,13 +1,11 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { JwtHelper } from 'angular2-jwt';
-import { of } from 'rxjs/observable/of';
-import { Subject } from 'rxjs/Subject';
+import { JwtHelperService } from '@auth0/angular-jwt/';
 
 @Injectable()
 export class AuthService {
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
 
   loginSubject = new BehaviorSubject<any>(null);
 
