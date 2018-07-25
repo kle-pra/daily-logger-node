@@ -4,8 +4,6 @@ const Log = require('../models/log.model');
 
 router.get('/', function (req, res) {
     //find all logs for the day from date param else all
-    console.log(req.user);
-
     if (req.query.date) {
         let date = new Date(req.query.date);
         let month = date.getMonth();

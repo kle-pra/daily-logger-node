@@ -20,7 +20,6 @@ router.post('/', function (req, res) {
     let password = req.body.password;
     //bcrypt password before saving to db in real app!
     let newUser = new User({
-        _id: null,
         email: email,
         password: bcrypt.hashSync(password, 8)
     });
