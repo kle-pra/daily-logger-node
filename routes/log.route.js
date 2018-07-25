@@ -52,6 +52,7 @@ router.post('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
+
     let updateLogData = {
         text: req.body.text,
         date: req.body.date
@@ -59,7 +60,7 @@ router.put('/:id', function (req, res) {
 
     Log.findOneAndUpdate(
         {
-            id: req.params.id,
+            _id: req.params.id,
             user: req.user.id
         }, updateLogData, { new: true }, (err, log) => {
             if (err) {
@@ -75,7 +76,7 @@ router.delete('/:id', function (req, res) {
 
     Log.findOneAndRemove(
         {
-            id: req.params.id,
+            _id: req.params.id,
             user: req.user.id
         }
         , function (err) {

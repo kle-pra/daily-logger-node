@@ -367,6 +367,10 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
+punycode@1.3.2
+MIT
+MIT
+
 querystring@0.2.0
 MIT
 MIT
